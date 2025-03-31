@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'inscription</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            text-align: center;
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Inscription</h2>
+
+        <form id="inscriptionForm">
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirmer le mot de passe</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+
+            <button type="submit">S'inscrire</button>
+
+            <div class="message" id="message"></div>
+        </form>
+    </div>
+
+    <script>
+        // Fonction de validation de formulaire
+        document.getElementById('inscriptionForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêcher l'envoi du formulaire
+
+            // Récupérer les valeurs du formulaire
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const messageDiv = document.getElementById('message');
+
+            // Validation des champs
+            if (username === '' || email === '' || password === '' || confirmPassword === '') {
+                messageDiv.textContent = 'Tous les champs doivent être remplis.';
+                messageDiv.style.color = 'red';
+                return;
+            }
+
+            // Vérifier si les mots de passe correspondent
+            if (password !== confirmPassword) {
+                messageDiv.textContent = 'Les mots de passe ne correspondent pas.';
+                messageDiv.style.color = 'red';
+                return;
+            }
+
+            // Vérifier la longueur du mot de passe
+            if (password.length < 6) {
+                messageDiv.textContent = 'Le mot de passe doit comporter au moins 6 caractères.';
+                messageDiv.style.color = 'red';
+                return;
+            }
+
+            // Si tout est valide
+            messageDiv.textContent = 'Inscription réussie !';
+            messageDiv.style.color = 'green';
+
+            // Vous pouvez ici ajouter du code pour envoyer ces données à un serveur via AJAX ou autre méthode.
+        });
+    </script>
+
+</body>
+</html>
